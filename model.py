@@ -24,8 +24,8 @@ def make_control_model():
     
     model = layers.GlobalAveragePooling2D()(model)
     
-    model = layers.Dense(256, activation="relu")
-    output = layers.Dense(10, activation="softmax")
+    model = layers.Dense(256, activation="relu")(model)
+    output = layers.Dense(10, activation="softmax")(model)
     
     full_model = keras.Model(inputs=input_img, outputs=output)
     return full_model
@@ -39,8 +39,7 @@ def main():
     (train_imgs, train_labels), (test_imgs, test_labels) = keras.datasets.cifar10.load_data()
     control_model = make_control_model()
     
-    control_model.compile(optimizer=keras.optimizers.Adam(), 
-                          learning_rate=learning_rate,
+    control_model.compile(optimizer=keras.optimizers.Adam(learning_rate=learning_rate), 
                           loss=keras.losses.SparseCategoricalCrossentropy(),
                           metrics=[keras.metrics.SparseCategoricalAccuracy()]
                           )
