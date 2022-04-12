@@ -43,7 +43,7 @@ def main():
                           loss=keras.losses.SparseCategoricalCrossentropy(),
                           metrics=[keras.metrics.SparseCategoricalAccuracy()]
                           )
-    control_model.fit(train_imgs, 
+    train = control_model.fit(train_imgs, 
                       train_labels, 
                       epochs=epochs,
                       batch_size=batch_size,
@@ -56,6 +56,25 @@ def main():
                       ],
                       validation_data=(test_imgs,test_labels)
                       )
+
+    # plot accuracy and lost over training time
+    plt.plot(train.history['accuracy'])
+    plt.plot(train.history['val_accuracy'])
+    plt.title('Accuracy Over Time')
+    plt.ylabel('accuracy')
+    plt.xlabel('epochs')
+    plt.legend(['train accuracy','test accuracy'])
+    plt.savefig('./acc_over_time.png')
+    plt.show()
+    
+    plt.plot(train.history['loss'])
+    plt.plot(train.history['val_loss'])
+    plt.title('Loss Over Time')
+    plt.ylabel('loss')
+    plt.xlabel('epochs')
+    plt.legend(['train loss','test loss'])
+    plt.savefig('./loss_over_time.png')
+    plt.show()
 
 if __name__ == "__main__":
     main()
