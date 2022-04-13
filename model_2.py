@@ -29,8 +29,6 @@ def make_mode_2(num_classes = 10):
 
             layers.Flatten(),
             layers.Dropout(0.2),
-            layers.Dense(1024, activation='relu'),
-            layers.Dropout(0.2),
             layers.Dense(256, activation='relu'),
             layers.Dropout(0.2),
             layers.Dense(num_classes, activation='softmax')
