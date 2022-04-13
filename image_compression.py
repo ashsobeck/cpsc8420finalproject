@@ -1,5 +1,6 @@
 import numpy as np
 from numpy.linalg import svd
+import sys
 
 
 #compression amount should be 0 and 1. Where 20% compression is 0.2
@@ -8,6 +9,7 @@ def compress_images(images, compression_amount=0.2):
     #images should be of size (batch_size, 32, 32, 3)
     compressed_images = []
 
+    total = images.shape[0]
     #this is the amount of columns of U that will be used in the images compression
     k = int((1 - compression_amount) * 32)
 
@@ -29,8 +31,21 @@ def compress_images(images, compression_amount=0.2):
         final_img[:, :, 1] = final_green
         final_img[:, :, 2] = final_blue
 
-        if (i+1) % 10000 == 0:
-            print(f"Compressed {i+1} images")
+        bar_len = 60
+        filled_len = int(round(bar_len * i / float(total)))
+        percents = round(100.0 * i / float(total), 1)
+        bar = '=' * filled_len + '-' * (bar_len - filled_len)
+        sys.stdout.write('Compressed Images %s/%s [%s] %s%%\r' % (i + 1, total, bar, percents))
+        #if (i + 1) != total:
+        sys.stdout.flush()
+        if (i + 1) == total:
+           print('Compressed Images %s/%s [%s] %s%%\r' % (i + 1, total, bar, percents) + "\n")
+                
+        
+            
+
+        #if (i+1) % 10000 == 0:
+            #print(f"Compressed {i+1} images")
 
         compressed_images.append(final_img.astype(np.int32))
 
