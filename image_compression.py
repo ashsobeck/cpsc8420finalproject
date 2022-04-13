@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.linalg import svd
 import sys
-
+import time
 
 #compression amount should be 0 and 1. Where 20% compression is 0.2
 def compress_images(images, compression_amount=0.2):
@@ -12,6 +12,8 @@ def compress_images(images, compression_amount=0.2):
     total = images.shape[0]
     #this is the amount of columns of U that will be used in the images compression
     k = int((1 - compression_amount) * 32)
+    begin_time = time.time()
+    eta = 0
 
     for i, img in enumerate(images):
         red = img[:, :, 0]
@@ -34,16 +36,22 @@ def compress_images(images, compression_amount=0.2):
         bar_len = 60
         filled_len = int(round(bar_len * i / float(total)))
         percents = round(100.0 * i / float(total), 1)
+        if percents % 1.0 == 0 and percents != 0.0:
+            cur_elapsed = time.time() - begin_time 
+            cur_elapsed = cur_elapsed / percents
+            eta = cur_elapsed * (100.0 - percents)
         bar = '=' * filled_len + '-' * (bar_len - filled_len)
-        sys.stdout.write('Compressed Images %s/%s [%s] %s%%\r' % (i + 1, total, bar, percents))
+
+        sys.stdout.write('Compressed Images %s/%s [%s] %s%%  ETA: %2ss\r' % (i + 1, total, bar, percents, int(eta)))
         sys.stdout.flush()
         if (i + 1) == total:
-           print('Compressed Images %s/%s [%s] %s%%\r' % (i + 1, total, bar, percents) + "\n")
+           print('Compressed Images %s/%s [%s] %s%%  ETA: %2ss\r' % (i + 1, total, bar, percents, int(eta)) + "\n")
                 
 
         compressed_images.append(final_img.astype(np.int32))
 
     compressed_images = np.array(compressed_images).reshape(-1, 32, 32, 3)
+
 
     return compressed_images
 
