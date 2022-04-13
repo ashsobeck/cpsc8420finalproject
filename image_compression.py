@@ -36,7 +36,6 @@ def compress_images(images, compression_amount=0.2):
         percents = round(100.0 * i / float(total), 1)
         bar = '=' * filled_len + '-' * (bar_len - filled_len)
         sys.stdout.write('Compressed Images %s/%s [%s] %s%%\r' % (i + 1, total, bar, percents))
-        #if (i + 1) != total:
         sys.stdout.flush()
         if (i + 1) == total:
            print('Compressed Images %s/%s [%s] %s%%\r' % (i + 1, total, bar, percents) + "\n")
