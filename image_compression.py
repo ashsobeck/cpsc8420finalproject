@@ -41,11 +41,6 @@ def compress_images(images, compression_amount=0.2):
         if (i + 1) == total:
            print('Compressed Images %s/%s [%s] %s%%\r' % (i + 1, total, bar, percents) + "\n")
                 
-        
-            
-
-        #if (i+1) % 10000 == 0:
-            #print(f"Compressed {i+1} images")
 
         compressed_images.append(final_img.astype(np.int32))
 
