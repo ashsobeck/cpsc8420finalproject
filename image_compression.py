@@ -97,8 +97,8 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
     # plot loss over training time
     train_legend = []
     for i, train in enumerate(training_data_control):
-        plt.plot(train.history['loss'])
-        plt.plot(train.history['val_loss'])
+        plt.plot(train.history['sparse_categorical_loss'])
+        plt.plot(train.history['val_sparse_categorical_loss'])
         train_legend.append("Train Loss %s Columns" %(compress_list[i]))
         train_legend.append("Test Loss %s Columns" %(compress_list[i]))
 
@@ -112,8 +112,8 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
 
     train_legend = []
     for i, train in enumerate(training_data_other):
-        plt.plot(train.history['loss'])
-        plt.plot(train.history['val_loss'])
+        plt.plot(train.history['sparse_categorical_loss'])
+        plt.plot(train.history['val_sparse_categorical_loss'])
         train_legend.append("Train Loss %s Columns" %(compress_list[i]))
         train_legend.append("Test Loss %s Columns" %(compress_list[i]))
 
