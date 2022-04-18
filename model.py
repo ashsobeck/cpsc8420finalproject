@@ -39,13 +39,13 @@ def main():
     # hyperparams
     learning_rate = 1e-3
     batch_size = 32
-    epochs = 100
+    epochs = 1
     img_size = 32
     
     (train_imgs, train_labels), (test_imgs, test_labels) = keras.datasets.cifar10.load_data()
 
     #list of columns to be used. 32 for all columns (0% compression), 1 for least columns
-    compress_list = [32, 6, 4, 2, 1]
+    compress_list = [32, 2]
 
     #this block of code is just to show a test img real quick if you want to with all the compressed images
     rows, col = 2, 3

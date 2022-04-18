@@ -2,7 +2,7 @@ import numpy as np
 from numpy.linalg import svd
 import sys
 import time
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 #compression amount should be 0 and 1. Where 20% compression is 0.2 or compression_amount can equal amount of columns you want compressed. 
 #therefor input a number between 1 and max_columns(32 for cifar) k = amount of columns of U used. 
@@ -59,8 +59,6 @@ def compress_images(images, compression_amount=0.2):
 
 
     return compressed_images
-
-
 
 def plot_graphs(training_data_control, training_data_other, compress_list):
     # plot accuracy over training time
