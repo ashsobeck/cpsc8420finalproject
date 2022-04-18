@@ -62,6 +62,7 @@ def compress_images(images, compression_amount=0.2):
 
 def plot_graphs(training_data_control, training_data_other, compress_list):
     # plot accuracy over training time
+    plt.clf()
     train_legend = []
     for i, train in enumerate(training_data_control):
         plt.plot(train.history['sparse_categorical_accuracy'])
