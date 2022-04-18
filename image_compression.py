@@ -77,6 +77,7 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
     plt.legend(train_legend)
     plt.savefig('figures/acc_over_time_control.png')
     plt.show()
+    plt.clf()
 
     train_legend = []
     for i, train in enumerate(training_data_other):
@@ -91,7 +92,7 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
     plt.legend(train_legend)
     plt.savefig('figures/acc_over_time_2nd_model.png')
     plt.show()
-
+    plt.clf()
 
     # plot loss over training time
     train_legend = []
@@ -107,6 +108,7 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
     plt.legend(train_legend)
     plt.savefig('figures/loss_over_time_control.png')
     plt.show()
+    plt.clf()
 
     train_legend = []
     for i, train in enumerate(training_data_other):
@@ -121,6 +123,7 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
     plt.legend(train_legend)
     plt.savefig('figures/loss_over_time_2nd_model.png')
     plt.show()
+    plt.clf()
     
 
 
