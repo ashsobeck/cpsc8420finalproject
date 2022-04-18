@@ -91,7 +91,7 @@ def main():
                         epochs=epochs,
                         batch_size=batch_size,
                         callbacks=[
-                            keras.callbacks.ModelCheckpoint('./model_save.ckpt', 
+                            keras.callbacks.ModelCheckpoint(f'./model_save_{i}.ckpt', 
                                                             monitor="val_loss",
                                                             mode="max",
                                                             save_freq='epoch',
@@ -105,7 +105,7 @@ def main():
                         epochs=epochs,
                         batch_size=batch_size,
                         callbacks=[
-                            keras.callbacks.ModelCheckpoint('./model_save.ckpt', 
+                            keras.callbacks.ModelCheckpoint(f'./large_model_save_{i}.ckpt', 
                                                             monitor="val_loss",
                                                             mode="max",
                                                             save_freq='epoch',
