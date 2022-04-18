@@ -89,6 +89,7 @@ def main():
         train = control_model.fit(train_imgs, 
                         train_labels, 
                         epochs=epochs,
+                        shuffle=True,
                         batch_size=batch_size,
                         callbacks=[
                             keras.callbacks.ModelCheckpoint(f'./checkpoints/model_save_{i}.ckpt', 
@@ -103,6 +104,7 @@ def main():
         train_2 = other_model.fit(train_imgs, 
                         train_labels, 
                         epochs=epochs,
+                        shuffle=True,
                         batch_size=batch_size,
                         callbacks=[
                             keras.callbacks.ModelCheckpoint(f'./checkpoints/large_model_save_{i}.ckpt', 
