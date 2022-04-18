@@ -64,8 +64,8 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
     # plot accuracy over training time
     train_legend = []
     for i, train in enumerate(training_data_control):
-        plt.plot(train.history['accuracy'])
-        plt.plot(train.history['val_accuracy'])
+        plt.plot(train.history['sparse_categorical_accuracy'])
+        plt.plot(train.history['val_sparse_categorical_accuracy'])
         train_legend.append("Train Acc %s Columns" %(compress_list[i]))
         train_legend.append("Test Acc %s Columns" %(compress_list[i]))
 
@@ -79,8 +79,8 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
 
     train_legend = []
     for i, train in enumerate(training_data_other):
-        plt.plot(train.history['accuracy'])
-        plt.plot(train.history['val_accuracy'])
+        plt.plot(train.history['sparse_categorical_accuracy'])
+        plt.plot(train.history['val_sparse_categorical_accuracy'])
         train_legend.append("Train Acc %s Columns" %(compress_list[i]))
         train_legend.append("Test Acc %s Columns" %(compress_list[i]))
 
@@ -95,8 +95,8 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
     # plot loss over training time
     train_legend = []
     for i, train in enumerate(training_data_control):
-        plt.plot(train.history['sparse_categorical_loss'])
-        plt.plot(train.history['val_sparse_categorical_loss'])
+        plt.plot(train.history['loss'])
+        plt.plot(train.history['val_loss'])
         train_legend.append("Train Loss %s Columns" %(compress_list[i]))
         train_legend.append("Test Loss %s Columns" %(compress_list[i]))
 
@@ -110,8 +110,8 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
 
     train_legend = []
     for i, train in enumerate(training_data_other):
-        plt.plot(train.history['sparse_categorical_loss'])
-        plt.plot(train.history['val_sparse_categorical_loss'])
+        plt.plot(train.history['loss'])
+        plt.plot(train.history['val_loss'])
         train_legend.append("Train Loss %s Columns" %(compress_list[i]))
         train_legend.append("Test Loss %s Columns" %(compress_list[i]))
 
