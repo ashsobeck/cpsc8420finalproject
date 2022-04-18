@@ -61,6 +61,7 @@ def main():
     #since it prints after each compress images, just clean up the terminal
     os.system("clear")
     plt.show()
+    plt.savefig('./compressed_imgs.png')
 
     training_data_control = []
     training_data_other = []

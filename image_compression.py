@@ -66,30 +66,52 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
     train_legend = []
     for i, train in enumerate(training_data_control):
         plt.plot(train.history['sparse_categorical_accuracy'])
-        plt.plot(train.history['val_sparse_categorical_accuracy'])
         train_legend.append("Train Acc %s Columns" %(compress_list[i]))
-        train_legend.append("Test Acc %s Columns" %(compress_list[i]))
 
-    plt.title('Accuracy Over Time Control Model')
+    plt.title('Training Accuracy Over Time Small Model')
     plt.ylabel('Accuracy')
     plt.xlabel('Epochs')
     plt.legend(train_legend)
-    plt.savefig('figures/acc_over_time_control.png')
+    plt.savefig('figures/train_acc_over_time_small.png')
+    plt.show()
+    plt.clf()
+    
+    train_legend = []
+    for i, train in enumerate(training_data_control):
+        plt.plot(train.history['val_sparse_categorical_accuracy'])
+        train_legend.append("Test Acc %s Columns" %(compress_list[i]))
+
+    plt.title('Testing Accuracy Over Time Small Model')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epochs')
+    plt.legend(train_legend)
+    plt.savefig('figures/test_acc_over_time_small.png')
     plt.show()
     plt.clf()
 
     train_legend = []
     for i, train in enumerate(training_data_other):
         plt.plot(train.history['sparse_categorical_accuracy'])
-        plt.plot(train.history['val_sparse_categorical_accuracy'])
         train_legend.append("Train Acc %s Columns" %(compress_list[i]))
-        train_legend.append("Test Acc %s Columns" %(compress_list[i]))
 
-    plt.title('Accuracy Over Time 2nd Model')
+    plt.title('Training Accuracy Over Time Large Model')
     plt.ylabel('Accuracy')
     plt.xlabel('Epochs')
     plt.legend(train_legend)
-    plt.savefig('figures/acc_over_time_2nd_model.png')
+    plt.savefig('figures/train_acc_over_time_large_model.png')
+    plt.show()
+    plt.clf()
+
+    train_legend = []
+    for i, train in enumerate(training_data_other):
+        plt.plot(train.history['val_sparse_categorical_accuracy'])
+        train_legend.append("Test Acc %s Columns" %(compress_list[i]))
+
+    plt.title('Testing Accuracy Over Time Large Model')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Epochs')
+    plt.legend(train_legend)
+    plt.savefig('figures/test_acc_over_time_large_model.png')
     plt.show()
     plt.clf()
 
@@ -97,30 +119,52 @@ def plot_graphs(training_data_control, training_data_other, compress_list):
     train_legend = []
     for i, train in enumerate(training_data_control):
         plt.plot(train.history['loss'])
-        plt.plot(train.history['val_loss'])
         train_legend.append("Train Loss %s Columns" %(compress_list[i]))
-        train_legend.append("Test Loss %s Columns" %(compress_list[i]))
 
-    plt.title('Loss Over Time Control Model')
+    plt.title('Training Loss Over Time Small Model')
     plt.ylabel('Loss')
     plt.xlabel('Epochs')
     plt.legend(train_legend)
-    plt.savefig('figures/loss_over_time_control.png')
+    plt.savefig('figures/train_loss_over_time_small.png')
+    plt.show()
+    plt.clf()
+
+    train_legend = []
+    for i, train in enumerate(training_data_control):
+        plt.plot(train.history['val_loss'])
+        train_legend.append("Test Loss %s Columns" %(compress_list[i]))
+
+    plt.title('Testing Loss Over Time Small Model')
+    plt.ylabel('Loss')
+    plt.xlabel('Epochs')
+    plt.legend(train_legend)
+    plt.savefig('figures/test_loss_over_time_small.png')
     plt.show()
     plt.clf()
 
     train_legend = []
     for i, train in enumerate(training_data_other):
         plt.plot(train.history['loss'])
-        plt.plot(train.history['val_loss'])
         train_legend.append("Train Loss %s Columns" %(compress_list[i]))
-        train_legend.append("Test Loss %s Columns" %(compress_list[i]))
 
-    plt.title('Loss Over Time 2nd Model')
+    plt.title('Training Loss Over Time Large Model')
     plt.ylabel('Loss')
     plt.xlabel('Epochs')
     plt.legend(train_legend)
-    plt.savefig('figures/loss_over_time_2nd_model.png')
+    plt.savefig('figures/loss_over_time_large_model.png')
+    plt.show()
+    plt.clf()
+
+    train_legend = []
+    for i, train in enumerate(training_data_other):
+        plt.plot(train.history['val_loss'])
+        train_legend.append("Test Loss %s Columns" %(compress_list[i]))
+
+    plt.title('Testing Loss Over Time Large Model')
+    plt.ylabel('Loss')
+    plt.xlabel('Epochs')
+    plt.legend(train_legend)
+    plt.savefig('figures/test_loss_over_time_large_model.png')
     plt.show()
     plt.clf()
     
