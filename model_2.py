@@ -2,7 +2,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 
-def make_mode_2(num_classes = 10):
+def make_model_2(num_classes = 10):
 
     input_size = (32, 32, 3)
 

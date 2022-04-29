@@ -12,8 +12,9 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from image_compression import compress_images, plot_graphs
 import numpy as np
-from model_2 import make_mode_2
+from model_2 import make_model_2
 import os
+from sklearn.metrics import classification_report
 # ssl._create_default_https_context = ssl._create_unverified_context
 
 def make_control_model():
@@ -34,6 +35,13 @@ def make_control_model():
     
     full_model = keras.Model(inputs=input_img, outputs=output)
     return full_model
+
+def eval_model(model, test_imgs, test_labels, file):
+    prediction = model.predict(test_imgs)
+    prediction = np.argmax(prediction, axis=1)
+    file.write(classification_report(y_true=test_labels, y_pred=prediction))
+    print(classification_report(y_true=test_labels, y_pred=prediction))
+    
 
 def main():
     # hyperparams
@@ -72,22 +80,26 @@ def main():
             train_imgs = compress_images(train_imgs, columns)
             test_imgs = compress_images(test_imgs, columns)
 
-        control_model = make_control_model()
+        small_model = make_control_model()
         #control_model.summary()
-        other_model = make_mode_2()
+        large_model = make_model_2()
         #other_model.summary()
 
-        other_model.compile(optimizer=keras.optimizers.Adam(learning_rate=learning_rate), 
+        large_model.compile(optimizer=keras.optimizers.Adam(learning_rate=learning_rate), 
                             loss=keras.losses.SparseCategoricalCrossentropy(),
-                            metrics=[keras.metrics.SparseCategoricalAccuracy()]
+                            metrics=[
+                                    keras.metrics.SparseCategoricalAccuracy()
+                            ]
                             )
 
         
-        control_model.compile(optimizer=keras.optimizers.Adam(learning_rate=learning_rate), 
+        small_model.compile(optimizer=keras.optimizers.Adam(learning_rate=learning_rate), 
                             loss=keras.losses.SparseCategoricalCrossentropy(),
-                            metrics=[keras.metrics.SparseCategoricalAccuracy()]
+                            metrics=[
+                                    keras.metrics.SparseCategoricalAccuracy()
+                            ]
                             )
-        train = control_model.fit(train_imgs, 
+        train = small_model.fit(train_imgs, 
                         train_labels, 
                         epochs=epochs,
                         shuffle=True,
@@ -102,7 +114,7 @@ def main():
                         validation_data=(test_imgs,test_labels)
                         )
 
-        train_2 = other_model.fit(train_imgs, 
+        train_2 = large_model.fit(train_imgs, 
                         train_labels, 
                         epochs=epochs,
                         shuffle=True,
@@ -118,6 +130,17 @@ def main():
                         )
         training_data_control.append(train)
         training_data_other.append(train_2)
+        with open('results.txt', 'a') as results_file:
+            results_file.write(f'Small model {i} columns results:\n')
+            # small_model.load_weights(f'./checkpoints/model_save_{i}.ckpt')
+            # large_model.load_weights(f'./checkpoints/large_model_save_{i}.ckpt')
+            eval_model(small_model, test_imgs, test_labels, results_file)
+            small_model_results = small_model.evaluate(test_imgs, test_labels)
+            large_model_results = large_model.evaluate(test_imgs, test_labels)
+            results_file.write(f'{small_model_results}\n')
+            results_file.write(f'Large model {i} columns results:\n')
+            eval_model(large_model, test_imgs, test_labels, results_file)
+            results_file.write(f'{large_model_results}\n')
 
     #create folder for figures
     os.makedirs("figures", exist_ok=True)
