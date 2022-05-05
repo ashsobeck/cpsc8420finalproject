@@ -27,7 +27,7 @@
 \usepackage{xcolor}         % colors
 \usepackage{graphicx}		% image inserting
 
-\title{Project Proposal 8420}
+\title{Final Report 8420}
 
 % The \author macro works with any number of authors. There are two commands
 % used to separate the names and addresses of multiple authors: \And and \AND.
@@ -55,7 +55,7 @@
 %\section{Submission of papers to NeurIPS 2021}
 \section{Abstract} 
 
-Our group explores the effectiveness of Convolutional Neural Networks (CNN) when  images that have been reduced by Principal Component Analysis (PCA) have been input as training. If CNN models can still be trained on dimensionally-reduced dataset, it would allow for dataset expansion with not needing to store as much information per image. We use the Canadian Institute for Advanced Research (CIFAR) dataset our training and testing images. We then used PCA to reduced the dataset at different intervals and train 2 CNN architectures we the dimensionally-reduced images. We used compression ratios at 81.25\%, 87.5\%, 93.75\%, and 96.88\% to see whether the models could effectively be trained to classify the images. What we found is that there is a correlation between the amount of compression and the models' ability to learn how to classify the images. At many points 81.2\% of compression, or the first 6 of 32 principal components of the image, was on par or just below the ability of the standard dataset. We conclude that it is possible to train models with some form of image compression. However further studies should be conducted for fine-tuning the technique. 
+Our group explores the effectiveness of Convolutional Neural Networks (CNN) when  images that have been reduced by Principal Component Analysis (PCA) have been input as training. If CNN models can still be trained on dimensionally-reduced dataset, it would allow for dataset expansion with not needing to store as much information per image. We use the Canadian Institute for Advanced Research (CIFAR) dataset our training and testing images. We then used PCA to reduced the dataset at different intervals and train 2 CNN architectures we the dimensionally-reduced images. We used compression ratios at 81.25\%, 87.5\%, 93.75\%, and 96.88\% to see whether the models could effectively be trained to classify the images. What we found is that there is a correlation between the amount of compression and the models' ability to learn how to classify the images. At many points 81.2\% of compression, or the first 6 of 32 principal components of the image, was on par or just below the ability of the standard dataset. We conclude that it is possible to train models with some form of image compression. However, further studies should be conducted for fine-tuning the technique. 
 
 \section{Motivation}
 
@@ -152,5 +152,11 @@ To test the performance of our model architectures, we trained them using Clemso
 	\endminipage\hfill	
 \end{figure}
 
-Based on our results, we confirm our hypothesis that the larger model performs better than the smaller model. As seen in the test loss for the small model, regardless of the amount of features utilized, there is a global minimum of loss and then the loss starts to diverge from the x-axis. The small model begins to overfit the data after about 15 epochs, and we learn that the small model might need to be trained for less time. The large model does not overfit the data, and we believe this to be the case because of the dropout layers in the architecture as well as the larger model most likely learning slower than the small model architecture. We also think that the larger model may need to be trained for longer due to a lack of convergence in the loss and accuracy. The testing loss in the larger model does not converge and smooth out at a certain epoch, so we believe that training longer might help with the convergence of the model. Another approach to help the convergence would be to lower the learning rate to a value such as .0001, so that the larger model learns even slower.
+Based on our results, we confirm our hypothesis that the larger model performs better than the smaller model. As seen in the test loss for the small model, regardless of the amount of features utilized, there is a global minimum of loss and then the loss starts to diverge from the x-axis. The small model (Figure 4 and 6) begins to overfit the data after about 15 epochs, and we learn that the small model might need to be trained for less time. The large model (Figure 5 and 7) does not overfit the data, and we believe this to be the case because of the dropout layers in the architecture as well as the larger model most likely learning slower than the small model architecture. We also think that the larger model may need to be trained for longer due to a lack of convergence in the loss and accuracy. The testing loss in the larger model does not converge and smooth out at a certain epoch, so we believe that training longer might help with the convergence of the model. Another approach to help the convergence would be to lower the learning rate to a value such as .0001, so that the larger model learns even slower.
+
+\section{Conclusion}
+
+We conclude that training models with a reduced dataset by PCA is indeed possible. With minimal loss in accuracy and loss, a feature reduced dataset can perform similar to a fully featured dataset. Because of PCA's strength of finding the most important features of an input, datasets can have more samples in the same amount of space. Models would be able to detect more nuances of the data with more samples. 
+
+We also conclude that there is no "golden standard" for the amount of features to reduce to. For each dataset, data exploration will need to be conducted in order to minimize image quality loss and maximize compression.
 \end{document}
